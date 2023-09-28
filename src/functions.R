@@ -381,13 +381,15 @@ plot_PCs <- function(PCA, output_dir, output_filename) {
 
 
 plot_hierarchical_cluster <- function(DT, output_dir) {
-    cluster_data <- DT[,-c(1:2)]
-    cluster_data[is.na(cluster_data)]=0
-    cluster_data=cluster_data[which(rowSums(cluster_data)>0),]
-    log2_cluster_data=log2(cluster_data+1)
+  cluster_data <- DT[,-c(1:2)]
+  cluster_data[is.na(cluster_data)]=0
+  cluster_data=cluster_data[which(rowSums(cluster_data)>0),]
+  log2_cluster_data=log2(cluster_data+1)
+  
   
   dist_mat <- dist(t(log2_cluster_data)) #
   hc_cluster <- hclust(dist_mat,method = "complete")
+  k_plot=length(unique(gsub('_[0-9]+$','',colnames(cluster_data))))
   g <- ggdendrogram(hc_cluster, rotate=TRUE) + labs(title='Hierarchical clustering')
   cat(paste0('   -> ', output_dir, '\n'))
   ggsave(g, filename=paste0(output_dir, 'hc_cluster_log2.pdf'))
