@@ -619,7 +619,7 @@ do_t_test_APMS <- function(DT, treatment_samples, control_samples) {
 
 
 
-plot_volcano <- function(DT.original, treatment, control, log_base, lfc_threshold, fdr_threshold, out_dir, labelgene) {
+plot_volcano <- function(DT.original, treatment, control, lfc_threshold, fdr_threshold, out_dir, labelgene) {
     options(ggrepel.max.overlaps=Inf)
     DT <- copy(DT.original)
     DT[, 'Group' := 'Others']
